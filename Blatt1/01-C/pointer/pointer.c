@@ -9,10 +9,10 @@ void basic_pointer (int x)
 
 	adresse_von_x = &x;
 
-	printf("Der Wert von x ist: %d\n", 0 /* TODO */);
-	printf("Die Adresse von x ist %p\n", NULL /* TODO */);
-	printf("Adresse von x mittels adresse_von_x %p\n", NULL /* TODO */);
-	printf("Wert von x mittels adresse_von_x: %d\n", 0 /* TODO */);
+	printf("Der Wert von x ist: %d\n", x);
+	printf("Die Adresse von x ist %p\n", &x);
+	printf("Adresse von x mittels adresse_von_x %p\n", adresse_von_x);
+	printf("Wert von x mittels adresse_von_x: %d\n", *adresse_von_x);
 }
 
 void basic_pointer2 (int x)

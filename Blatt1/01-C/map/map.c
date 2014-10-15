@@ -40,6 +40,24 @@ void set_dir (int x, int y, cardd dir)
 	}
 }
 
+char * s;
+
+char * long_dir(cardd dir)
+{
+	switch(dir) {
+		case N: s = "N";break;
+		case S: s = "S";break;
+		case W: s = "W";break;
+		case E: s = "E";break;
+		case N|W: s = "NW";break;
+		case N|E: s = "NE";break;
+		case S|W: s = "SW";break;
+		case S|E: s = "SE";break;
+		default: s = "0";
+	}
+	return s;
+}
+
 // Die Funktion show_map soll das Array in Form einer 3x3-Matrix ausgeben
 void show_map (void)
 {
@@ -47,18 +65,11 @@ void show_map (void)
 	int x;
 	for (x = 0; x < 3; ++x)
 	{
-		printf("%-4d%-3d%2d\n", map[x][0], map[x][1], map[x][2]);
-		switch(dir) {
-			case N: 'N';break;
-			case S: 'S';break;
-			case W: 'W';break;
-			case E: 'E';break;
-			case N|W: "NW";break;
-			case N|E: "NE";break;
-			case S|W: "SW";break;
-			case S|E: "SE";break;
-			default: '0';
-		}
+		printf("%-4s%-3s%2s\n", long_dir(map[x][0]), long_dir(map[x][1]), long_dir(map[x][2]));
+		// printf("%-4s%-3s%2s\n", "NW", "N", "NE");
+		// printf("%-4s%-3s%2s\n", "W", "0", "E");
+		// printf("%-4s%-3s%2s\n", "SW", "S", "SE");
+		// long_dir(map[x][0]);
 	}
 }
 
