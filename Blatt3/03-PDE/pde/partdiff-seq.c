@@ -180,6 +180,7 @@ initMatrices (struct calculation_arguments* arguments, struct options* options)
 /* getResiduum: calculates residuum                                         */
 /* Input: x,y - actual column and row                                       */
 /* ************************************************************************ */
+// inline 
 double
 getResiduum (struct calculation_arguments* arguments, struct options* options, int x, int y, double star)
 {

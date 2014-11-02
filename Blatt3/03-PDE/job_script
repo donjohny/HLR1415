@@ -1,0 +1,8 @@
+#!/bin/bash
+#SBATCH --job-name=timescript
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+
+srun /home/gresens/03-PDE/timescript > /home/gresens/03-PDE/timescript.out
+
+echo fertig > /home/gresens/03-PDE/job_script.out
