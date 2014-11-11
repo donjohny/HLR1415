@@ -1,0 +1,28 @@
+Vor irgendwelchen Änderungen mit ./partdiff-seq 1 2 128 1 2 1024 ausgeführt:
+-O0 => 55.252274
+-O1 => 33.326271
+-O2 => 32.878919
+-O3 => 17.710976
+
+2 Sachen fallen auf:
+1. Die Funktion getResidiuum wird 1088472064 mal aufgerufen.
+2. Abgesehen von getResidiuum und calculate trägt kaum
+   eine Funktion nennenswert zur Laufzeit mit bei.
+
+Wenn man getResiduum manuell inlined, dann verbessert sich
+die Berechnungszeit wie folgt:
+
+-O0 => 38.0725
+-O1 => 18.5750
+-O2 => 17.6475
+-O3 => 17.6025
+
+Testweises Vertauschen des Zugriffs in calculate auf die Matrizen
+führte ebenfalls zu einem Geschwindigkeitszuwachs:
+
+-O0 => 26.2100
+-O1 => 9.1575
+-O2 => 4.6380
+-O3 => 4.1123
+
+

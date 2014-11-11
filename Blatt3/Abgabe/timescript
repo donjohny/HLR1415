@@ -1,0 +1,6 @@
+#!/bin/bash
+
+HOSTNAME=$(hostname)
+TIMESTAMP=$(date +%H:%M:%S,%N)
+
+echo $HOSTNAME: $TIMESTAMP

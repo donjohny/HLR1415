@@ -1,0 +1,8 @@
+#!/bin/bash
+#SBATCH --partition=compute
+#SBATCH --job-name=partdiff-seq_benchmark
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+
+srun /home/gresens/03-PDE/pde/partdiff-seq 1 2 128 1 2 1024
+gprof /home/gresens/03-PDE/pde/partdiff-seq

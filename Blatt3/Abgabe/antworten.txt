@@ -1,0 +1,70 @@
+Aufgabe 1:
+1. Was bedeutet der Begriff Batch-Queuing? Welche Aufgaben hat ein Batch-Queuing-System?
+Bei Batch-Queuing geht es um die Verwaltung von mehreren Programmen, die auf einem Rechner ausgeführt werden sollen. Dabei verteilt ein Batch-Queuing-System automatisiert die verfügbare Rechenzeit/Ressourcen auf die verschiedenen Programme, wobei es z.B. verschiedene Prioritäten und Abhängigkeiten zwischen einzelnen Jobs beachtet.
+
+2. Nennen Sie drei Beispiele für Batch-Queuing-Systeme
+Moab, Argent Job Scheduler, Condor
+
+3. Machen Sie sich mit der Manpage von sbatch vertraut.
+
+4. Welches Batch-Queuing-System wird auf dem Cluster verwendet?
+SLURM
+
+5. Wie lassen sich die aktuellen Jobs und deren Status anzeigen?
+$ squeue
+
+6. Machen Sie sich mit dem Befehl sview vertraut. Beschreiben Sie die wichtigsten Vorteile gegen ̈uber dem vorigen Punkt.
+sview bietet ein grafisches Front-End zum Monitoring und Controlling von SLURM
+
+7. Gibt es eine Möglichkeit, einen bereits abgeschickten Job zu löschen (bevor oder während er läuft)? Wenn ja, wie?
+Die Reservierung der Ressourcen lässt sich durch scancel <jobid> widerrufen.
+
+8. Können auf dem Cluster mehrere Nutzer oder Jobs gleichzeitig denselben Knoten benutzen?
+Ja, wenn beim Aufruf von salloc die Option -s (oder --share) gesetzt wurde, die Einstellung des Systems und des Knotens wird jedoch zuvor verwendet
+
+9. Finden Sie heraus wie Sie sich den detaillierten Status eines Jobs ausgeben lassen können.
+squeue -l
+
+10. Welche Scheduling-Verfahren sind bei dem auf dem Cluster benutzten System möglich? Welches wird benutzt?
+builtin (nach Priorität), backfill (auffüllen von Lücken), sowie wiki und wiki2 als Interfaces für externe Scheduler. Der Cluster nutzt backfill-Scheduling (sched/backfill)
+
+11. Finden Sie heraus, wie Sie einen einzelnen Knoten allokieren können. Allokieren Sie einen konkreten Knoten (z. B. west7), bauen Sie eine Verbindung zu diesem Knoten auf und führen sie hostname darauf aus.
+Am beispiel von west7:
+$ salloc --nodelist=west7
+oder
+$ salloc -w west7
+Ausführen von hostname: $ srun hostname
+
+12. Wie hoch ist das Timeout auf dem Cluster, bis alle Knoten wieder freigegeben werden?
+6 Stunden
+
+13. Wie können Sie die Priorität ihrer Jobs nachschauen? Können Sie diese verändern oder beeinflussen?
+
+
+14. Welche unterschiedlichen Partitionen sind auf dem Cluster eingerichtet? Wie kann eine andere als die Standardpartition benutzt werden?
+Auf dem Cluster existieren neben cluster die Partitionen abu, compute und magny. Die zu nutzende Partition lässt sich mit der Option -p spezifizieren.
+
+Aufgabe 2:
+Das Skript läuft immer auf west[1-4].
+Zuerst werden alle Rückmeldungen von west1 in die Datei geschrieben.
+Dann kommen in scheinbar chaotischer Reihenfolge die Einträge von den
+restlichen Knoten.
+Die Rückmeldungen von west1 finden ungefähr 1,5 Millisekunden vor allen
+anderen statt.
+Eventuell ist das timesprict tatsächlich auf west1 gespeichert und daher
+brauchen alle anderen Knoten ein paar Millisekunden um es zu kopieren
+und lokal bei sich auszuführen.
+
+Aufgabe 3:
+context-switches: Ein Wechsel der Ausführung zwischen verschiedenen 
+Prozessen führen zu einer Verzögerung in der Ausführung. Wenn ein
+Prozess unterbrochen wird, dann muss sein Zustand gespeichert und ein
+anderer Prozess geladen werden, dieser wird dann eine Zeit lang
+ausgeführt und wenn der Wechsel zurück zum alten Prozess erfolgen soll,
+dann erfordert dies wieder ein (eventuelles) Speichern des neuen Prozess
+und das Laden des Alten.
+
+page-faults: Wenn eine Seite zwar im virtuellen Adressraum existiert
+aber momentan nicht im physischen Adressraum liegt, dann muss das
+Betriebssystem die entsprechende Speicherseite erst von der Festplatte
+laden, bevor das Programm auf den Speicher zugreifen kann.
